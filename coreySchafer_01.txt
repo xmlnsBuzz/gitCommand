@@ -1,0 +1,49 @@
+git과 같은 분산형 버전관리는 사용가 각자의 working directory에서 local로 버전을 관리하고 필요시에만 서버에 올리거나 가져오므로 서버와 연결이 끊겨도 상관없다. 또한 팀원 모두가 같은 버전의 데이터를 가질 수 있어서 만약의 경우 복구가 용이하다.
+Central VCS(SVN) 중앙집중형 버전관리는 모든 버전관리 데이터가 서버컴퓨터에 있으므로 인터넷에 연결되어야 버전관리를 할 수 있다. 데이터가 오가는 시간이 소모된다.
+git을 다운로드해 설치하는 방법
+버전체크하기 - >git --version
+git config >git config --global user.name "username" > git config --global user.email "useremail" config 목록 보기 >git config --list
+GIT HELP > git help <commandName> 또는 >git <commandName> --help
+2 common Scenerios...
+시나리오 1 : Local에서 작업중인 데이터를 git repository로 initialize 하는 방법
+현재 local disk의 어느 곳에 Cloned-Repo, Slides, Local-Rep0o, remote_repo.git 이라는 4개의 폴더가 있다.
+Local-Repo 폴더에는 .project, calc.py라는 파일이 있다.
+>git init 로 initialize
+하고 나면 .git이라는 폴더가 생긴다.
+Initialize한 git을 취소하는 방법 >rm -rf .git
+Before first commit >git status
+git status로 상태를 확인한다.
+>touch .gitignore
+WHERE ARE WE NOW?
+ADD FILES TO STAGING AREA
+>git add -A >git status
+1개의 파일을 add할 경우 >git add .gitignore  >git status
+새파일이나 수정된 파일을 한꺼번에 add 하는 경우 >git add -A >git status
+REMOVE FILES FORM STAGING AREA 는 >git reset
+1개 파일의 staging을 취소하는 경우 >git reset  [filename] 예를 들어 .gitignore의 staging을 취소하려면 >git reset calc.py >git status
+폴더(working directory) 전체를 reset할 경우 >git reset
+OUR FIRST COMMIT >git add -A >git commit -m "Initial commit" >git status >git log
+git log는 commit한 파일에 대한 hash code, author, date, commit message 등을 보여준다
+CLONING A REMOTE REPO > git clone <url> <cloneTargeFolderPath> >git clone ../remote_repo.git .  >git clone https://github.com/[usernaem]/[reponame] .
+git clone <url> . 에서 '.'은 현재디렉터리를 뜻한다.
+base directory로 가서 cloned-repo로 들어간다. >cd .. >ls >cd Cloned-Repo >ls -al
+local repo에서 다른 directory로 'clone' 하는 방법
+>git clone ../remote.git .
+VIEWING INFORMATION ABOUT THE REMOTE REPOSITORY
+>git remote -v >git branch -a
+PUSHING CHANGES
+COMMIT CHANGES LIKE WE DID PREVIOUSLY >git diff >git status > git add -A >git commit -m "Modified multiply function"
+THEN PUSH: >git pull origin mster >git push origin master
+>git add -A > git commit -m "Multiply Function"
+>git push -u origin calc-divide > git branch -a
+>git checkout master
+>git branch --merged >git merge calc-divide
+>git push origin master
+branch 지우는 방법 >git branch -d calc-divide > git branch -a (-a 는 List all remote branches )
+remote 의 calc-divide branch 지우는 방법 >git push origin --delete calc-divide 이후에  >git branch -a 로 확인한다.
+calc.py를 수정한 후에 >git status >git add -A >git commit -m "Subtract"
+>git push -u origin subtract
+>git checkout master
+>git pull origin master
+>git merge subtract
+>git push origin master

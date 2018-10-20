@@ -11,6 +11,3 @@
 * 전역 및 지역 Alias 목록 보기
 > git config --get-regexp alias
 
-```
-
-```
